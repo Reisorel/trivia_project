@@ -1,4 +1,4 @@
-[Cliquez ici pour lancer une partie !](https://safe-hollows-42987-f7a365282149.herokuapp.com/)
+[Cliquez ici pour lancer une partie !](https://quiz-rock-a9f8a58b7c61.herokuapp.com/)
 
 ### Description :
 Ce projet est une simple page web comportant 20 questions type trivia / quizZ.
