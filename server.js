@@ -1,4 +1,6 @@
+// importe le module Express. Framework web minimaliste pour JS
 const express = require('express');
+// importe le module path qui fournit l'utilitaire permettant de travailler avec les chemins de fichiers et répertoires 
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 5000;
