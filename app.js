@@ -1,3 +1,21 @@
+document.addEventListener("DOMContentLoaded", () => {
+  // Affiche une alerte pour demander le nom de l'utilisateur
+  const userName = prompt("Entrez votre nom :");
+
+  // Envoie le nom de l'utilisateur au serveur
+  console.log(userName)
+  fetch('/username', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: userName })
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Erreur :', error));
+});
+
 const responses =
   [
     "a", "c", "c", "a", "b",
