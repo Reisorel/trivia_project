@@ -1,19 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Affiche une alerte pour demander le nom de l'utilisateur
-  const userName = prompt("Entrez votre nom :");
+  let userName = "";
 
-  // Envoie le nom de l'utilisateur au serveur
-  console.log(userName)
+  while (!userName || !userName.trim()) {
+    userName = prompt("Entrez votre pseudo !");
+    if (!userName || !userName.trim()) {
+      alert("Vous avez bien un nom tout de même ?!");
+    }
+  }
+
+  console.log(userName.trim());
   fetch('/username', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name: userName })
+    body: JSON.stringify({ name: userName.trim() })
   })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Erreur :', error));
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Erreur :', error));
 });
 
 const responses =
@@ -59,9 +64,10 @@ backButton.addEventListener('click', () => {
 
 function showResults(results) {
   const errorsNumber = results.filter(el => el === false).length;
+  const score = 20 - errorsNumber;
 
-  switch (errorsNumber) {
-    case 0:
+  switch (score) {
+    case 20:
       titleResult.textContent = `🏆 Bravo, tu es un spécialiste du ROCK ! 🏆`;
       helpResult.style.display = "block";
       helpResult.textContent = "Grands moments et petites anecdotes n'ont aucun secret pour toi !";
@@ -70,11 +76,11 @@ function showResults(results) {
       backButton.style.display = "block"
       backButton.textContent = "Recommencer 🔄"
       break;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
+    case 19:
+    case 18:
+    case 17:
+    case 16:
+    case 15:
       titleResult.textContent = `🥈 Super, tu possèdes un bonne connaissance du ROCK! 🥈`;
       helpResult.style.display = "block";
       helpResult.textContent = "Tu aimes la culture rock, mais il te manque encore quelques détails !";
@@ -83,10 +89,10 @@ function showResults(results) {
       backButton.style.display = "block"
       backButton.textContent = "Recommencer 🔄"
       break;
-    case 6:
-    case 7:
-    case 8:
-    case 9:
+    case 14:
+    case 13:
+    case 12:
+    case 11:
     case 10:
       titleResult.textContent = `🥈 Tu aimes le rock...mais tu peux t'améliorer ! 🥈`;
       helpResult.style.display = "block";
@@ -96,11 +102,11 @@ function showResults(results) {
       backButton.style.display = "block"
       backButton.textContent = "Recommencer 🔄"
       break;
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
+    case 9:
+    case 8:
+    case 7:
+    case 6:
+    case 5:
       titleResult.textContent = `😅 Hum, tu devrais écouter plus de rock si tu veux t'améliorer !😅`;
       helpResult.style.display = "block";
       helpResult.textContent = "Il ne faut pas se décourager, tu peux t'améliorer sur le ROCK";
@@ -137,7 +143,7 @@ const radioInputs = document.querySelectorAll("input[type='radio']")
 radioInputs.forEach(radioInput => radioInput.addEventListener('input', resetColor))
 
 function resetColor(e) {
-  const index = e.target.getAttribute("name").slice(1) -1;
+  const index = e.target.getAttribute("name").slice(1) - 1;
   const parentQuestionBlock = questions[index];
 
   parentQuestionBlock.style.backgroundColor = "#f1f1f1";
