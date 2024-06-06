@@ -162,3 +162,19 @@ function resetColor(e) {
   parentQuestionBlock.style.backgroundColor = "#f1f1f1";
   parentQuestionBlock.style.backgroundImage = "none";
 }
+
+function ranking() {
+  fetch('/ranking')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des scores');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Scores récupérés :', data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
