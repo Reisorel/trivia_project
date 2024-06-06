@@ -22,29 +22,17 @@ app.use(express.static(path.join(__dirname)));
 // Middleware pour lire les fichiers jsons
 app.use(express.json());
 
-// Route pour inscire les name/score/date dans la BDD.
-// app.post('/submit-score', async (req, res) => {
-//   try {
-//     const { name, score, quiz_date } = req.body;
-//     await pool.query(
-//       'INSERT INTO scores (name, score, quiz_date) VALUES ($1, $2, $3)',
-//       [name, score, quiz_date]
-//     );
-//     res.json({ success: true, message: "Score enregistré avec succès!" });
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).json({ success: false, error: "Erreur serveur lors de l'enregistrement du score" });
-//   }
-// });
+
 app.post('/submit-score', async (req, res) => {
   try {
-    console.log('Data received:', req.body); // Ajoutez cette ligne pour vérifier les données reçues
-    const { name, score } = req.body;
-    console.log('Name:', name); // Ajoutez cette ligne pour vérifier le nom
-    console.log('Score:', score); // Ajoutez cette ligne pour vérifier le score
+    console.log('Data received:', req.body); // log pour vérifier les données reçues
+    const { name, score, quiz_date } = req.body;
+    console.log('Name:', name); // log pour vérifier le nom
+    console.log('Score:', score); // log pour vérifier le score
+    console.log('Date:', quiz_date); //log pour vérifier la date
     await pool.query(
-      'INSERT INTO scores (name, score) VALUES ($1, $2)',
-      [name, score]
+      'INSERT INTO scores (name, score, quiz_date) VALUES ($1, $2, $3)',
+      [name, score, quiz_date]
     );
     res.json({ success: true, message: "Score backend enregistré avec succès!" });
   } catch (err) {

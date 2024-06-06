@@ -122,15 +122,17 @@ function showResults(results) {
 }
 
 function sendScoreToServer(score) {
-  console.log('Score before sending:', score); // log pour vérifier le score
+  console.log('Score before sending:', score); // log pour vérifier le score côté front
+  const currentDate = new Date()
   fetch('/submit-score', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: window.userName, 
+      name: window.userName,
       score: score,
+      quiz_date: currentDate
     })
   })
   .then(response => response.json())
