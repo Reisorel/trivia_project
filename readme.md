@@ -35,3 +35,7 @@ function showResults(results) {
     // Filtre permettant de gérer le cas ou l'utilisateur fait un sans faute au quizz (0 erreurs)
   }
 }
+
+
+
+
