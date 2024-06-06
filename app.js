@@ -8,18 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  console.log(userName.trim());
-  fetch('/username', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name: userName.trim() })
-  })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Erreur :', error));
+  // Stocker le nom de l'utilisateur dans une variable globale
+  window.userName = userName.trim();
+  console.log(window.userName);
 });
+
 
 const responses =
   [
@@ -72,7 +65,7 @@ function showResults(results) {
       helpResult.style.display = "block";
       helpResult.textContent = "Grands moments et petites anecdotes n'ont aucun secret pour toi !";
       markResult.style.display = "block";
-      markResult.innerHTML = `Score : <span>${20 - errorsNumber}/ 20</span>`;
+      markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block"
       backButton.textContent = "Recommencer 🔄"
       break;
@@ -85,7 +78,7 @@ function showResults(results) {
       helpResult.style.display = "block";
       helpResult.textContent = "Tu aimes la culture rock, mais il te manque encore quelques détails !";
       markResult.style.display = "block";
-      markResult.innerHTML = `Score : <span>${20 - errorsNumber}/ 20</span>`;
+      markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block"
       backButton.textContent = "Recommencer 🔄"
       break;
@@ -94,11 +87,11 @@ function showResults(results) {
     case 12:
     case 11:
     case 10:
-      titleResult.textContent = `🥈 Tu aimes le rock...mais tu peux t'améliorer ! 🥈`;
+      titleResult.textContent = `🥉 Tu aimes le rock...mais tu peux t'améliorer ! 🥉`;
       helpResult.style.display = "block";
       helpResult.textContent = "La culture du rock ne t'es pas étrangère, mais il faut encore un peu bosser pour être au top !";
       markResult.style.display = "block";
-      markResult.innerHTML = `Score : <span>${20 - errorsNumber}/ 20</span>`;
+      markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block"
       backButton.textContent = "Recommencer 🔄"
       break;
@@ -111,7 +104,7 @@ function showResults(results) {
       helpResult.style.display = "block";
       helpResult.textContent = "Il ne faut pas se décourager, tu peux t'améliorer sur le ROCK";
       markResult.style.display = "block";
-      markResult.innerHTML = `Score : <span>${20 - errorsNumber}/ 20</span>`;
+      markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block"
       backButton.textContent = "Recommencer 🔄"
       break;
@@ -120,11 +113,31 @@ function showResults(results) {
       helpResult.style.display = "block";
       helpResult.textContent = "Il semble que tu aies besoin de revoir certains aspects du rock.";
       markResult.style.display = "block";
-      markResult.innerHTML = `Score : <span>${20 - errorsNumber}/ 20</span>`;
+      markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block"
       backButton.textContent = "Recommencer 🔄"
       break;
   }
+    sendScoreToServer(score);
+}
+
+function sendScoreToServer(score) {
+  console.log('Score before sending:', score); // log pour vérifier le score côté front
+  const currentDate = new Date()
+  fetch('/submit-score', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: window.userName,
+      score: score,
+      quiz_date: currentDate
+    })
+  })
+  .then(response => response.json())
+  .then(data => console.log('Score saved front:', data))
+  .catch(error => console.error('Erreur lors de l\'envoi du score:', error));
 }
 
 const questions = document.querySelectorAll(".question-block");
@@ -148,4 +161,20 @@ function resetColor(e) {
 
   parentQuestionBlock.style.backgroundColor = "#f1f1f1";
   parentQuestionBlock.style.backgroundImage = "none";
+}
+
+function ranking() {
+  fetch('/ranking')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des scores');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Scores récupérés :', data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
 }
