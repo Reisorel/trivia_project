@@ -26,6 +26,8 @@ app.use(express.json());
 app.post('/submit-score', async (req, res) => {
   try {
     const { name, score, quiz_date } = req.body;
+    console.log('Received data:', req.body); // Vérifiez ce qui est reçu
+
 
     // Calculer le rang du nouveau score en fonction des scores déjà enregistrés
     const result = await pool.query(
@@ -61,18 +63,27 @@ app.get('/scores', async (req, res) => {
 // Route pour récupérer l'ensemble des scores/name/date par date asendante
 app.get('/ranking', async (req, res) => {
   try {
-    // Effectuer une requête à la base de données pour récupérer tous les scores, triés par score décroissant
-    const scores = await pool.query('SELECT * FROM scores ORDER BY rank ASC');
+    const scoresResult = await pool.query('SELECT * FROM scores ORDER BY score DESC, quiz_date DESC');
+    const scores = scoresResult.rows;
+    // console.log('Scores récupérés:', scores);
 
-    // Recalculer le rang dynamiquement en fonction des scores récupérés
-    for (let i = 0; i < scores.rows.length; i++) {
+    for (let i = 0; i < scores.length; i++) {
       const rank = i + 1;
-      await pool.query('UPDATE scores SET rank = $1 WHERE id = $2', [rank, scores.rows[i].id]);
-      scores.rows[i].rank = rank; // Mettre à jour la propriété rank dans l'objet retourné
+      scores[i].rank = rank;
+      scores[i].quiz_date = new Date(scores[i].quiz_date).toLocaleDateString('fr-FR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
     }
+      // console.log(`Attribuer rang ${rank} à l'utilisateur ${scores[i].id}`);
 
-    // Renvoyer les scores recalculés et mis à jour au client sous forme de réponse JSON
-    res.json(scores.rows);
+    const updatePromises = scores.map(score =>
+      pool.query('UPDATE scores SET rank = $1 WHERE id = $2', [score.rank, score.id])
+    );
+    await Promise.all(updatePromises);
+
+    res.json(scores);
   } catch (error) {
     console.error('Erreur lors de la récupération des scores :', error);
     res.status(500).json({ success: false, error: "Erreur serveur lors de la récupération des scores" });
