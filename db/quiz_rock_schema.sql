@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 15.6 (Homebrew)
--- Dumped by pg_dump version 16.0
+-- Dumped by pg_dump version 16.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -62,28 +62,6 @@ ALTER SEQUENCE public.scores_id_seq OWNED BY public.scores.id;
 --
 
 ALTER TABLE ONLY public.scores ALTER COLUMN id SET DEFAULT nextval('public.scores_id_seq'::regclass);
-
-
---
--- Data for Name: scores; Type: TABLE DATA; Schema: public; Owner: lerosier
---
-
-COPY public.scores (id, name, score, quiz_date, rank) FROM stdin;
-29	Majax le meilleur	19	2024-06-06	1
-31	Danielito le malin	14	2024-06-07	2
-30	Bandolin l'expert	13	2024-06-06	4
-70	Oui-Oui	13	2024-06-07	3
-75	Henri	10	2024-06-07	5
-76	Fourier	10	2024-06-07	6
-67	gogu	9	2024-06-07	7
-\.
-
-
---
--- Name: scores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: lerosier
---
-
-SELECT pg_catalog.setval('public.scores_id_seq', 76, true);
 
 
 --

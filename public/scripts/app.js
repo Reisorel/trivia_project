@@ -126,7 +126,7 @@ function sendScoreToServer(score) {
   const currentDate = new Date().toISOString().split('T')[0];
   console.log('Formatted Date:', currentDate); // log pour vérifier le format de la date
 
-  fetch('/submit-score', {
+  fetch('/api/scores/submit', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -171,7 +171,7 @@ function resetColor(e) {
 }
 
 function ranking() {
-  fetch('/ranking')
+  fetch('/api/scores/ranking')
     .then(response => {
       if (!response.ok) {
         throw new Error('Erreur lors de la récupération des scores');
@@ -192,7 +192,7 @@ function showHighScores() {
   console.log('Fetching high scores...');
 
   // Récupérer les données du backend
-  fetch('/ranking')
+  fetch('/api/scores/ranking')
     .then(response => {
       if (!response.ok) {
         throw new Error('Erreur lors de la récupération des scores');
