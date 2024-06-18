@@ -61,9 +61,9 @@ function showResults(results) {
 
   switch (score) {
     case 20:
-      titleResult.textContent = `🏆 Bravo, tu es un spécialiste du ROCK ! 🏆`;
+      titleResult.textContent = `🏆 Bravo, tu es un spécialiste des fastivals ! 🏆`;
       helpResult.style.display = "block";
-      helpResult.textContent = "Grands moments et petites anecdotes n'ont aucun secret pour toi !";
+      helpResult.textContent = "Grands événements et petites anecdotes n'ont aucun secret pour toi !";
       markResult.style.display = "block";
       markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block";
@@ -74,9 +74,9 @@ function showResults(results) {
     case 17:
     case 16:
     case 15:
-      titleResult.textContent = `🥈 Super, tu possèdes un bonne connaissance du ROCK! 🥈`;
+      titleResult.textContent = `🥈 Super, tu possèdes un bonne connaissance des festivals! 🥈`;
       helpResult.style.display = "block";
-      helpResult.textContent = "Tu aimes la culture rock, mais il te manque encore quelques détails !";
+      helpResult.textContent = "Tu aimes la culture festivalière, mais il te manque encore quelques détails !";
       markResult.style.display = "block";
       markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block";
@@ -87,9 +87,9 @@ function showResults(results) {
     case 12:
     case 11:
     case 10:
-      titleResult.textContent = `🥉 Tu aimes le rock...mais tu peux t'améliorer ! 🥉`;
+      titleResult.textContent = `🥉 Tu aimes les festivals...mais tu peux t'améliorer ! 🥉`;
       helpResult.style.display = "block";
-      helpResult.textContent = "La culture du rock ne t'es pas étrangère, mais il faut encore un peu bosser pour être au top !";
+      helpResult.textContent = "La culture du festoche ne t'es pas étrangère, mais il faut encore un peu bosser pour être au top !";
       markResult.style.display = "block";
       markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block";
@@ -100,18 +100,18 @@ function showResults(results) {
     case 7:
     case 6:
     case 5:
-      titleResult.textContent = `😅 Hum, tu devrais écouter plus de rock si tu veux t'améliorer !😅`;
+      titleResult.textContent = `😅 Hum, tu devrais aller à plus de festivals si tu veux t'améliorer !😅`;
       helpResult.style.display = "block";
-      helpResult.textContent = "Il ne faut pas se décourager, tu peux t'améliorer sur le ROCK";
+      helpResult.textContent = "Il ne faut pas se décourager, tu peux t'améliorer sur les festivals";
       markResult.style.display = "block";
       markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block";
       backButton.textContent = "Recommencer 🔄";
       break;
     default:
-      titleResult.textContent = `❌ Besoin de réviser tes connaissances sur le ROCK ! ❌`;
+      titleResult.textContent = `❌ Toi l'été c'est plutôt rando non ? ! ❌`;
       helpResult.style.display = "block";
-      helpResult.textContent = "Il semble que tu aies besoin de revoir certains aspects du rock.";
+      helpResult.textContent = "Il semble que tu aies besoin d'aller un peu plus en festival !'.";
       markResult.style.display = "block";
       markResult.innerHTML = `Score : <span>${score}/ 20</span>`;
       backButton.style.display = "block";
