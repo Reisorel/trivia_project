@@ -4,7 +4,10 @@
 Ce projet est une simple page web comportant 20 questions type trivia / quizZ.
 Ce projet vise à approfondir :
 La maitrise des sélécteurs, des boucles et les interactions JS / DOM.
-Egalement une introduction à Node pour pouvoir lancer la page web depuis Heroku.
+Les media queries pour rendre l'interface utilisable depuis tous les terminaux 
+Le déploiement sur Heroku
+Ce projet vise à intorduire :
+L'utilisation de Node.JS comme backend avec requête via API Rest et base de données PostGreSQL
 
 ### Fonctionnalités:
 
@@ -14,6 +17,7 @@ Egalement une introduction à Node pour pouvoir lancer la page web depuis Heroku
 - **Interaction dynamique** : Utilisation de JavaScript pour gérer les interactions en temps réel avec le DOM.
 - **Gestion des événements** : Implémentation de sélecteurs et de boucles pour un contrôle précis des événements utilisateur.
 - **Backend en Node.js** : Introduction à Node.js pour servir la page web et gérer les requêtes.
+- **POstgreSQL** : Gestion des tableaux de scores à partir d'une base de données postGreSQL  + API REST.
 - **Déploiement sur Heroku** : Déployé sur Heroku pour un accès facile et instantané en ligne.
 
 ### Exemple de code :
