@@ -1,12 +1,12 @@
 [Cliquez ici pour lancer une partie !](https://quiz-rock-a9f8a58b7c61.herokuapp.com/)
 
 ### Description :
-Ce projet est une simple page web comportant 20 questions type trivia / quizZ.
+Ce projet est une simple page web comportant 20 questions type trivia / quizz.
 Ce projet vise à approfondir :
 La maitrise des sélécteurs, des boucles et les interactions JS / DOM.
 Les media queries pour rendre l'interface utilisable depuis tous les terminaux 
 Le déploiement sur Heroku
-Ce projet vise à intorduire :
+Ce projet vise à introduire :
 L'utilisation de Node.JS comme backend avec requête via API Rest et base de données PostGreSQL
 
 ### Fonctionnalités:
