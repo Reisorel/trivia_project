@@ -1,4 +1,4 @@
-const pool = require('../utils/db');
+const pool = require('../../backend/utils/db');
 
 // Méthode pour soumettre un score
 exports.submitScore = async (req, res) => {
@@ -24,17 +24,6 @@ exports.submitScore = async (req, res) => {
   }
 };
 
-// Méthode pour récupérer les scores
-exports.getScores = async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM scores');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-};
-
 // Méthode pour récupérer le classement
 exports.getRanking = async (req, res) => {
   try {
@@ -47,7 +36,7 @@ exports.getRanking = async (req, res) => {
       scores[i].quiz_date = new Date(scores[i].quiz_date).toLocaleDateString('fr-FR', {
         day: '2-digit',
         month: '2-digit',
-        year: 'numeric'
+        year: 'numeric',
       });
     }
 
