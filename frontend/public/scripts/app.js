@@ -1,16 +1,27 @@
+// Ajouter d'un événement lors du chargmement de la page pour inscire un username
 document.addEventListener("DOMContentLoaded", () => {
   let userName = "";
 
   while (!userName || !userName.trim()) {
+    const userResponse = confirm("Entrez votre pseudo ! Cliquez sur 'Annuler' pour quitter.");
+
+// Possibilité d'annuler
+    if (userResponse === false) {
+      alert("Vous avez annulé l'entrée du pseudo.");
+      break;
+    }
+
     userName = prompt("Entrez votre pseudo !");
+
     if (!userName || !userName.trim()) {
       alert("Vous avez bien un nom tout de même ?!");
     }
   }
 
-  // Stocker le nom de l'utilisateur dans une variable globale
-  window.userName = userName.trim();
-  console.log(window.userName);
+  if (userName && userName.trim()) {
+    window.userName = userName.trim(); // Définit le pseudo en tant que variable globale
+    alert(`Bienvenue, ${userName.trim()}!`);
+  }
 });
 
 const responses = [
@@ -182,7 +193,7 @@ function ranking() {
       console.log('Scores récupérés :', data);
     })
     .catch(error => {
-      console.error(error);
+      console.error('Erreur', error);
     });
 }
 
