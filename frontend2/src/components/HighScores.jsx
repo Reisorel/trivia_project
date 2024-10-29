@@ -1,9 +1,7 @@
 import React from 'react';
 import ScoreTableRow from './ScoreTableRow';
 
-function HighScores({ highScores }) {
-  console.log('HighScores rendus :', highScores); // Log pour vérifier les scores affichés
-  return (
+function HighScores({ highScores }) {  return (
     <div className="highscores">
       <h2>🏆 HIGHSCORES 🏆</h2>
       <table>

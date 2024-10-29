@@ -1,6 +1,7 @@
 import React from 'react';
 
 function ScoreTableRow({ score, rank }) {
+  console.log('ScoreTableRow rendu avec score :', score, 'et rank :', rank);
   return (
     <tr>
       <td>{rank}</td>
