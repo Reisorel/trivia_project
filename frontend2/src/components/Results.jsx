@@ -5,28 +5,28 @@ function Results({ score }) {
     switch (true) {
       case score === 20:
         return {
-          title: "🏆 Bravo, tu es un spécialiste des festivals ! 🏆",
-          help: "Grands événements et petites anecdotes n'ont aucun secret pour toi !",
+          title: "🏆 Bravo, tu es un fin mélomane! 🏆",
+          help: "Tu possède une excellente culture musicale sur de nombreux styles !",
         };
       case score >= 15:
         return {
-          title: "🥈 Super, tu possèdes une bonne connaissance des festivals! 🥈",
-          help: "Tu aimes la culture festivalière, mais il te manque encore quelques détails !",
+          title: "🥈 Super, tu possèdes une bonne connaissance musicale 🥈",
+          help: "Tu connais beaucoup de choses, mais il te manque encore quelques détails !",
         };
       case score >= 10:
         return {
-          title: "🥉 Tu aimes les festivals... mais tu peux t'améliorer ! 🥉",
-          help: "La culture du festoche ne t'est pas étrangère, mais il faut encore un peu bosser pour être au top !",
+          title: "🥉 Tu connais la musique... mais tu peux t'améliorer ! 🥉",
+          help: "La musique contemporaine ne t'est pas étrangère, mais il faut encore un peu bosser pour être au top !",
         };
       case score >= 5:
         return {
-          title: "😅 Hum, tu devrais aller à plus de festivals si tu veux t'améliorer ! 😅",
-          help: "Il ne faut pas se décourager, tu peux t'améliorer sur les festivals.",
+          title: "😅 Hum, tu devrais écouter un peu plus la radio si tu veux t'améliorer ! 😅",
+          help: "Il ne faut pas se décourager, tu peux t'améliorer la culture musicale !.",
         };
       default:
         return {
-          title: "❌ Toi l'été c'est plutôt rando non ? ❌",
-          help: "Il semble que tu aies besoin d'aller un peu plus en festival !",
+          title: "❌ Toi le matin c'est plutôt les infos ? ❌",
+          help: "N'hésite pas à écouter la radio un peu plus !",
         };
     }
   };
@@ -44,4 +44,3 @@ function Results({ score }) {
 }
 
 export default Results;
-
