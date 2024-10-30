@@ -1,4 +1,4 @@
-# [Cliquez ici pour lancer une partie !](https://quiz-rock-a9f8a58b7c61.herokuapp.com/)
+# [Cliquez ici pour lancer une partie !](https://quizz-rock-2-b0329d81cf4d.herokuapp.com/)
 
 ### Description :
 Ce projet est une application **React/Node**, composée de 20 questions de type trivia / quiz. Il vise à introduire :
