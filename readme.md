@@ -1,45 +1,49 @@
 [Cliquez ici pour lancer une partie !](https://quiz-rock-a9f8a58b7c61.herokuapp.com/)
 
 ### Description :
-Ce projet est une simple page web comportant 20 questions type trivia / quizz.
-Ce projet vise à approfondir :
-La maitrise des sélécteurs, des boucles et les interactions JS / DOM.
-Les media queries pour rendre l'interface utilisable depuis tous les terminaux 
-Le déploiement sur Heroku
-Ce projet vise à introduire :
-L'utilisation de Node.JS comme backend avec requête via API Rest et base de données PostGreSQL
+Ce projet est une application React/Node, composée de 20 questions de type trivia / quiz.
+Il vise à introduire :
 
-### Fonctionnalités:
+L’utilisation de React pour une gestion optimisée par composants, offrant une interface modulaire et réactive.
+Node.js comme serveur backend pour gérer les requêtes API et orchestrer les opérations de l’application.
+Les media queries pour une interface adaptative sur tous les terminaux.
+Le déploiement sur Heroku pour rendre l’application accessible en ligne.
 
-- **Interface utilisateur intuitive** : Conçue pour être facile à naviguer
--**Responsive** : Conçue pour être utilisée depuis desktop ou mobile.
-- **Questions de quiz variées** : Comprend 20 questions de type trivia couvrant divers sujets.
-- **Interaction dynamique** : Utilisation de JavaScript pour gérer les interactions en temps réel avec le DOM.
-- **Gestion des événements** : Implémentation de sélecteurs et de boucles pour un contrôle précis des événements utilisateur.
-- **Backend en Node.js** : Introduction à Node.js pour servir la page web et gérer les requêtes.
-- **POstgreSQL** : Gestion des tableaux de scores à partir d'une base de données postGreSQL  + API REST.
-- **Déploiement sur Heroku** : Déployé sur Heroku pour un accès facile et instantané en ligne.
+### Fonctionnalités :
+Interface utilisateur intuitive : Simple à naviguer, pensée pour différents types d’écrans.
+Responsive : Conçue pour une utilisation fluide depuis desktop et mobile.
+Questions de quiz variées : 20 questions de type trivia couvrant divers sujets.
+Interaction dynamique : Gestion des interactions en temps réel avec React, permettant des mises à jour immédiates et fluides.
+Serveur backend en Node.js : En charge des requêtes API pour centraliser et gérer la logique métier.
+PostgreSQL : Base de données relationnelle pour le suivi des scores, accessible via une API REST.
+Déploiement sur Heroku : Permettant un accès en ligne instantané et facilité.
+Bundler Vite pour des performances optimisées : Utilisation de Vite pour accélérer le chargement et améliorer l’expérience utilisateur.
 
 ### Exemple de code :
 
-```javascript
-function showResults(results) {
-  const errorsNumber = results.filter(el => el === false).length;
+// Méthode pour soumettre un score
+exports.submitScore = async (req, res) => {
+  try {
+    const { name, score, quiz_date } = req.body;
+    console.log('Received data:', req.body);
 
-  switch (errorsNumber) {
-    case 0:
-      titleResult.textContent = `🏆 Bravo, tu es un spécialiste du ROCK ! 🏆`;
-      helpResult.style.display = "block";
-      helpResult.textContent = "Grands moments et petites anecdotes n'ont aucun secret pour toi !";
-      markResult.style.display = "block";
-      markResult.innerHTML = `Score : <span>${20 - errorsNumber}/ 20</span>`;
-      backButton.style.display = "block";
-      backButton.textContent = "Recommencer 🔄";
-      break;
-    // Filtre permettant de gérer le cas ou l'utilisateur fait un sans faute au quizz (0 erreurs)
+    const result = await pool.query(
+      'SELECT COUNT(*) + 1 AS rank FROM scores WHERE score > $1',
+      [score]
+    );
+    const rank = result.rows[0].rank;
+
+    await pool.query(
+      'INSERT INTO scores (name, score, quiz_date, rank) VALUES ($1, $2, $3, $4)',
+      [name, score, quiz_date, rank]
+    );
+
+    res.json({ success: true, message: "Score backend enregistré avec succès!", rank: rank });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ success: false, error: "Erreur serveur lors de l'enregistrement des données" });
   }
-}
-
+};
 
 
 
